@@ -1,18 +1,21 @@
 import { useEffect, useState } from "react";
-import { getAllBreeds } from "./services/axios";
+import { getAllBreedsTryCatch, getImagesByBreed } from "./services/axios";
 
 import "./App.css";
 
 function App() {
-  const [breeds, setBreeds] = useState();
+  const [breeds, setBreeds] = useState({});
+  const [breedImages, setBreedImages] = useState();
 
   useEffect(() => {
-    getAllBreeds().then((res) => {
+    getAllBreedsTryCatch().then((res) => {
       setBreeds(res.message);
     });
-  }, [getAllBreeds]);
 
-  console.log(breeds);
+    getImagesByBreed().then((res) => {
+      setBreedImages(res.message);
+    });
+  }, [getAllBreedsTryCatch, getImagesByBreed]);
 
   return (
     <>
