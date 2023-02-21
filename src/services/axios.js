@@ -1,5 +1,5 @@
 import axios from "axios";
-
+// getAllBreeds .then
 export const getAllBreeds = async () => {
   const result = await axios
     .get("https://dog.ceo/api/breeds/list/all")
@@ -12,7 +12,7 @@ export const getAllBreeds = async () => {
     });
   return result;
 };
-
+// getAllBreeds .try .catch
 export const getAllBreedsTryCatch = async () => {
   try {
     const response = await axios("https://dog.ceo/api/breeds/list/all");
@@ -22,7 +22,7 @@ export const getAllBreedsTryCatch = async () => {
     throw new Error("API error");
   }
 };
-
+// getImagesByBreed .then
 export const getImagesByBreed = async (breed = "hound") => {
   const result = await axios
     .get(`https://dog.ceo/api/breed/${breed}/images`)
@@ -35,7 +35,7 @@ export const getImagesByBreed = async (breed = "hound") => {
     });
   return result;
 };
-
+// getImagesByBreed .try .catch
 export const getImagesByBreedTryCatch = async (breed) => {
   if (typeof breed !== "string") {
     throw new Error("invalid param!");
