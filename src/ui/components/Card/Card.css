@@ -1,0 +1,33 @@
+.modal__container {
+  width: 100%;
+  text-align: center;
+  padding: 0;
+}
+
+.breed__image__container {
+  place-self: center;
+  width: 35rem;
+  height: 25rem;
+  border: 0.2rem solid #D3ECA7;
+  border-radius: 1rem;
+  display: inline-block;
+  vertical-align: middle;
+  overflow: hidden;
+  margin: 1rem 1rem;
+  box-shadow: 2px 2px 2px 0.5px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.breed__image {
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  border-radius: .3rem;
+  transform: translate(-50%, -50%);
+  position: absolute;
+}
+
+.breed__image__container:hover {
+  transform: scale(1.02);
+  transition: 200ms all;
+}

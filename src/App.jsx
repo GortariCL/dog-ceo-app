@@ -1,40 +1,46 @@
 import { useEffect, useState } from "react";
-import { getAllBreedsTryCatch, getImagesByBreed } from "./services/axios";
-
-import "./App.css";
+import { getAllBreeds, getImagesByBreed } from "./services/axios";
+import { Card } from "./ui/components/Card/Card";
+import { Header } from "./ui/components/Header/Header";
 
 function App() {
-  const [breeds, setBreeds] = useState({});
-  const [breedImages, setBreedImages] = useState();
+  const [breed, setBreed] = useState();
+  const [breedImages, setBreedImages] = useState([]);
+  const [breedsOptions, setBreedsOptions] = useState([]);
+  const [subBreedOptions, setSubBreedOptions] = useState([]);
 
   useEffect(() => {
-    getAllBreedsTryCatch().then((res) => {
-      setBreeds(res.message);
+    getAllBreeds().then((res) => {
+      setBreedsOptions(
+        Object.keys(res.message).map((breed) => {
+          return { label: breed, value: breed };
+        })
+      );
+
+      for (let arrBreed of Object.entries(res.message)) {
+        if (arrBreed[0] === breed) {
+          setSubBreedOptions(
+            arrBreed[1].map((subBreed) => {
+              return { label: subBreed, value: subBreed };
+            })
+          );
+        }
+      }
     });
 
-    getImagesByBreed("beagle").then((res) => {
+    getImagesByBreed(breed).then((res) => {
       setBreedImages(res.message);
     });
-  }, [getAllBreedsTryCatch, getImagesByBreed]);
+  }, [getAllBreeds, getImagesByBreed, breed]);
 
   return (
     <>
-      <h1>Dog Ceo App</h1>
-      {
-        <div>
-          {breedImages &&
-            breedImages.map((element, index) => {
-              return (
-                <img
-                  key={index}
-                  className="dog__image"
-                  src={element}
-                  alt="perros"
-                />
-              );
-            })}
-        </div>
-      }
+      <Header
+        breedsOptions={breedsOptions}
+        subBreedOptions={subBreedOptions}
+        setBreed={setBreed}
+      />
+      <Card breedImages={breedImages} />
     </>
   );
 }
