@@ -43,7 +43,7 @@ function App() {
         })
       );
     });
-  }, [getAllBreeds, getImagesByBreed, breed]);
+  }, [getAllBreeds, getImagesByBreed, getSubBreedList, breed]);
 
   return (
     <>
