@@ -23,7 +23,7 @@ export const getAllBreedsTryCatch = async () => {
   }
 };
 // getImagesByBreed .then
-export const getImagesByBreed = async (breed = "beagle") => {
+export const getImagesByBreed = async (breed) => {
   if (typeof breed !== "string") {
     throw new Error("invalid param!");
   }
@@ -66,6 +66,7 @@ export const getSubBreedList = async (breed) => {
   return result;
 };
 
+// getSubBreedList .try .catch
 export const getSubBreedListTryCatch = async (breed) => {
   if (typeof breed !== "string") {
     throw new Error("invalid param!");

@@ -8,7 +8,7 @@ import { Card } from "./ui/components/Card/Card";
 import { Header } from "./ui/components/Header/Header";
 
 function App() {
-  const [breed, setBreed] = useState();
+  const [breed, setBreed] = useState("beagle");
   const [breedImages, setBreedImages] = useState([]);
   const [breedsOptions, setBreedsOptions] = useState([]);
   const [subBreedOptions, setSubBreedOptions] = useState([]);
@@ -21,7 +21,7 @@ function App() {
         })
       );
 
-      getSubBreedList().then((res) => {
+      getSubBreedList(breed).then((res) => {
         console.log(res);
       });
 
@@ -47,6 +47,7 @@ function App() {
         breedsOptions={breedsOptions}
         subBreedOptions={subBreedOptions}
         setBreed={setBreed}
+        breed={breed}
       />
       <Card breedImages={breedImages} />
     </>

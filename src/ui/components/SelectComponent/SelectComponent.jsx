@@ -6,6 +6,7 @@ export const SelectComponent = ({
   breedsOptions,
   subBreedOptions,
   setBreed,
+  breed,
 }) => {
   const handleChange = (element) => {
     setBreed(element.value);

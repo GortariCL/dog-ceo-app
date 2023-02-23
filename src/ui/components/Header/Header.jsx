@@ -3,7 +3,7 @@ import { SelectComponent } from "../SelectComponent/SelectComponent";
 
 import "./Header.css";
 
-export const Header = ({ breedsOptions, subBreedOptions, setBreed }) => {
+export const Header = ({ breedsOptions, subBreedOptions, setBreed, breed }) => {
   return (
     <div className="navbar">
       <div className="container">
@@ -17,6 +17,7 @@ export const Header = ({ breedsOptions, subBreedOptions, setBreed }) => {
             breedsOptions={breedsOptions}
             subBreedOptions={subBreedOptions}
             setBreed={setBreed}
+            breed={breed}
           />
         </div>
       </div>
