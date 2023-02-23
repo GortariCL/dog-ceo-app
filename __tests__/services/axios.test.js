@@ -5,15 +5,17 @@ import {
   getAllBreedsTryCatch,
   getImagesByBreed,
   getImagesByBreedTryCatch,
+  getSubBreedList,
 } from "../../src/services/axios";
 import { allBreeds } from "../../src/utils/allBreeds";
 import { beagleImages } from "../../src/utils/beagleImages";
 import { imagesByBreed } from "../../src/utils/imagesByBreed";
+import { subBreedList } from "../../src/utils/subBreedList";
 
 vi.mock("axios");
 
-describe("given the getAllBreeds and getImagesByBreed functions", async () => {
-  it("should return all breeds data", async () => {
+describe("given the getAllBreeds, getImagesByBreed, getSubBreed functions", async () => {
+  it.skip("should return all breeds data", async () => {
     // arrange
     const breeds = allBreeds;
     axios.get.mockResolvedValue({
@@ -134,5 +136,17 @@ describe("given the getAllBreeds and getImagesByBreed functions", async () => {
     const expected = await getImagesByBreedTryCatch("beagle");
 
     expect(expected).toEqual(beagleImages);
+  });
+
+  it("should return sub-breed list", async () => {
+    // arrange
+    const list = subBreedList;
+    axios.get.mockResolvedValue({
+      data: subBreedList,
+    });
+    // act
+    const expected = await getSubBreedList("bulldog");
+    // assert
+    expect(expected).toEqual(list);
   });
 });

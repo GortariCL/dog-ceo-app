@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { getAllBreeds, getImagesByBreed } from "./services/axios";
+import {
+  getAllBreeds,
+  getImagesByBreed,
+  getSubBreedList,
+} from "./services/axios";
 import { Card } from "./ui/components/Card/Card";
 import { Header } from "./ui/components/Header/Header";
 
@@ -16,6 +20,10 @@ function App() {
           return { label: breed, value: breed };
         })
       );
+
+      getSubBreedList().then((res) => {
+        console.log(res);
+      });
 
       for (let arrBreed of Object.entries(res.message)) {
         if (arrBreed[0] === breed) {

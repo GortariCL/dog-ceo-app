@@ -23,7 +23,10 @@ export const getAllBreedsTryCatch = async () => {
   }
 };
 // getImagesByBreed .then
-export const getImagesByBreed = async (breed = "hound") => {
+export const getImagesByBreed = async (breed = "beagle") => {
+  if (typeof breed !== "string") {
+    throw new Error("invalid param!");
+  }
   const result = await axios
     .get(`https://dog.ceo/api/breed/${breed}/images`)
     .then((response) => {
@@ -42,6 +45,33 @@ export const getImagesByBreedTryCatch = async (breed) => {
   }
   try {
     const response = await axios(`https://dog.ceo/api/breed/${breed}/images`);
+    const result = response.data;
+    return result;
+  } catch (err) {
+    throw new Error("API error");
+  }
+};
+
+// getSubBreed .then
+export const getSubBreedList = async (breed) => {
+  const result = await axios
+    .get(`https://dog.ceo/api/breed/${breed}/list`)
+    .then((response) => {
+      const res = response.data;
+      return res;
+    })
+    .catch((error) => {
+      throw new Error("API error");
+    });
+  return result;
+};
+
+export const getSubBreedListTryCatch = async (breed) => {
+  if (typeof breed !== "string") {
+    throw new Error("invalid param!");
+  }
+  try {
+    const response = await axios(`https://dog.ceo/api/breed/${breed}/list`);
     const result = response.data;
     return result;
   } catch (err) {

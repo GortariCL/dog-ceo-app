@@ -18,7 +18,7 @@ export const SelectComponent = ({
         options={breedsOptions}
         onChange={handleChange}
       />
-      <p className="message">Sub-breed</p>
+      <p className="message">Sub-breed:</p>
       <Select className="select" options={subBreedOptions} />
     </>
   );
