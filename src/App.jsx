@@ -21,15 +21,15 @@ function App() {
         })
       );
 
-      for (let arrBreed of Object.entries(res.message)) {
-        if (arrBreed[0] === breed) {
-          setSubBreedOptions(
-            arrBreed[1].map((subBreed) => {
-              return { label: subBreed, value: subBreed };
-            })
-          );
-        }
-      }
+      // for (let arrBreed of Object.entries(res.message)) {
+      //   if (arrBreed[0] === breed) {
+      //     setSubBreedOptions(
+      //       arrBreed[1].map((subBreed) => {
+      //         return { label: subBreed, value: subBreed };
+      //       })
+      //     );
+      //   }
+      // }
     });
 
     getImagesByBreed(breed).then((res) => {
@@ -37,7 +37,11 @@ function App() {
     });
 
     getSubBreedList(breed).then((res) => {
-      console.log(res);
+      setSubBreedOptions(
+        res.message.map((subBreed) => {
+          return { label: subBreed, value: subBreed };
+        })
+      );
     });
   }, [getAllBreeds, getImagesByBreed, breed]);
 
