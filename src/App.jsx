@@ -21,10 +21,6 @@ function App() {
         })
       );
 
-      getSubBreedList(breed).then((res) => {
-        console.log(res);
-      });
-
       for (let arrBreed of Object.entries(res.message)) {
         if (arrBreed[0] === breed) {
           setSubBreedOptions(
@@ -38,6 +34,10 @@ function App() {
 
     getImagesByBreed(breed).then((res) => {
       setBreedImages(res.message);
+    });
+
+    getSubBreedList(breed).then((res) => {
+      console.log(res);
     });
   }, [getAllBreeds, getImagesByBreed, breed]);
 
