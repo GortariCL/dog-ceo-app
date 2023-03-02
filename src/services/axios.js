@@ -68,9 +68,6 @@ export const getSubBreedList = async (breed) => {
 
 // getSubBreedList .try .catch
 export const getSubBreedListTryCatch = async (breed) => {
-  if (typeof breed !== "string") {
-    throw new Error("invalid param!");
-  }
   try {
     const response = await axios(`https://dog.ceo/api/breed/${breed}/list`);
     const result = response.data;

@@ -28,6 +28,13 @@ describe("given the getAllBreeds, getImagesByBreed, getSubBreed functions", asyn
     expect(expected).toEqual(breeds);
   });
 
+  it("should throw an error if API is down", async () => {
+    // arrange
+    axios.get.mockImplementation(() => Promise.reject());
+    // act andassert
+    await expect(() => getAllBreeds()).rejects.toThrowError("API error");
+  });
+
   it("should return all breeds data with try/catch", async () => {
     // arrange
     const breeds = allBreeds;
@@ -38,6 +45,13 @@ describe("given the getAllBreeds, getImagesByBreed, getSubBreed functions", asyn
     const expected = await getAllBreedsTryCatch();
     // assert
     expect(expected).toEqual(breeds);
+  });
+
+  it("should throw an error if API is down", async () => {
+    // arrange
+    axios.mockImplementation(() => Promise.reject());
+    // act andassert
+    await expect(() => getAllBreedsTryCatch()).rejects.toThrowError("API error");
   });
 
   it("should return images by breed", async () => {
@@ -62,6 +76,57 @@ describe("given the getAllBreeds, getImagesByBreed, getSubBreed functions", asyn
     const expected = await getImagesByBreed("beagle");
     // assert
     expect(expected).toEqual(breedImages);
+  });
+
+  it("should throw an error if API is down", async () => {
+    // arrange
+    axios.get.mockImplementation(() => Promise.reject());
+    // act andassert
+    await expect(() => getImagesByBreed("beagle")).rejects.toThrowError("API error");
+  });
+
+  it("should throw an error if the parameter is not a string", async () => {
+    vi.clearAllMocks();
+    // arrange
+    const numParam = 13;
+    const arrayParam = [];
+    const booleanParam = false;
+    const objectParam = {};
+    const undefinedParam = undefined;
+    const nullParam = null;
+
+    // act and assert
+    await expect(() => getImagesByBreed(numParam)).rejects.toThrowError(
+      "invalid param!"
+    );
+
+    await expect(() =>
+      getImagesByBreed(arrayParam)
+    ).rejects.toThrowError("invalid param!");
+
+    await expect(() =>
+      getImagesByBreed(booleanParam)
+    ).rejects.toThrowError("invalid param!");
+
+    await expect(() =>
+      getImagesByBreed(objectParam)
+    ).rejects.toThrowError("invalid param!");
+
+    await expect(() =>
+      getImagesByBreed(undefinedParam)
+    ).rejects.toThrowError("invalid param!");
+
+    await expect(() =>
+      getImagesByBreed(nullParam)
+    ).rejects.toThrowError("invalid param!");
+
+    axios.get.mockResolvedValue({
+      data: beagleImages,
+    });
+
+    const expected = await getImagesByBreed("beagle");
+
+    expect(expected).toEqual(beagleImages);
   });
 
   it("should return images by breed", async () => {
@@ -90,9 +155,9 @@ describe("given the getAllBreeds, getImagesByBreed, getSubBreed functions", asyn
 
   it("should throw an error if API is down", async () => {
     // arrange
-    axios.get.mockImplementation(() => Promise.reject());
+    axios.mockImplementation(() => Promise.reject());
     // act andassert
-    await expect(() => getAllBreeds()).rejects.toThrowError("API error");
+    await expect(() => getImagesByBreedTryCatch("beagle")).rejects.toThrowError("API error");
   });
 
   it("should throw an error if the parameter is not a string", async () => {
@@ -151,6 +216,13 @@ describe("given the getAllBreeds, getImagesByBreed, getSubBreed functions", asyn
     expect(expected).toEqual(list);
   });
 
+  it("should throw an error if API is down", async () => {
+    // arrange
+    axios.get.mockImplementation(() => Promise.reject());
+    // act andassert
+    await expect(() => getSubBreedList("bulldog")).rejects.toThrowError("API error");
+  });
+
   it("should return sub-breed list with try/catch", async () => {
     // arrange
     const list = subBreedList;
@@ -161,5 +233,12 @@ describe("given the getAllBreeds, getImagesByBreed, getSubBreed functions", asyn
     const expected = await getSubBreedListTryCatch("bulldog");
     // assert
     expect(expected).toEqual(list);
+  });
+
+  it("should throw an error if API is down", async () => {
+    // arrange
+    axios.mockImplementation(() => Promise.reject());
+    // act andassert
+    await expect(() => getSubBreedListTryCatch("bulldog")).rejects.toThrowError("API error");
   });
 });
