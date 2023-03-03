@@ -15,6 +15,7 @@ export const SelectComponent = ({
     <>
       <p className="message">Breed:</p>
       <Select
+        dataTestId="select-breed"
         className="select"
         options={breedsOptions}
         onChange={handleChange}
