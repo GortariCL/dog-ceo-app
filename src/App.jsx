@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  getAllBreeds,
-  getImagesByBreed,
-  getSubBreedList,
-} from "./services/axios";
+import { getAllBreeds, getImagesByBreed, getSubBreedList } from "./services";
 import { Card } from "./ui/components/Card/Card";
 import { Header } from "./ui/components/Header/Header";
 

@@ -1,5 +1,5 @@
-import { fireEvent, render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { fireEvent, render } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
 import { SelectComponent } from "../../../../src/ui/components/SelectComponent/SelectComponent";
 
 const options = [
@@ -12,10 +12,10 @@ const options = [
 describe("given the <SelectComponent />", () => {
   it("should render with options as an empty array", () => {
     // Arrange
-    render(<SelectComponent breedsOptions={[]} />);
+    const { getByText } = render(<SelectComponent breedsOptions={[]} />);
     // Act
-    const breedOption1 = screen.getByText("Select a breed");
-    const breedOption2 = screen.getByText("No hay razas para mostrar");
+    const breedOption1 = getByText("Select a breed");
+    const breedOption2 = getByText("No hay razas para mostrar");
     // Assert
     expect(breedOption1).toBeInTheDocument();
     expect(breedOption2).toBeInTheDocument();
@@ -23,17 +23,17 @@ describe("given the <SelectComponent />", () => {
 
   it("should render with selectable options", () => {
     // Arrange
-    render(<SelectComponent breedsOptions={options} />);
+    const { getByText } = render(<SelectComponent breedsOptions={options} />);
     // Act
-    const breedOption1 = screen.getByText("Hound");
-    const breedOption2 = screen.getByText("Beagle");
-    const breedOption3 = screen.getByText("Akita");
-    const breedOption4 = screen.getByText("Bulldog");
+    const breedOption1 = getByText("Hound");
+    const breedOption2 = getByText("Beagle");
+    const breedOption3 = getByText("Akita");
+    const breedOption4 = getByText("Bulldog");
     // Assert
-    expect(breedOption1).toBeDefined();
-    expect(breedOption2).toBeDefined();
-    expect(breedOption3).toBeDefined();
-    expect(breedOption4).toBeDefined();
+    expect(breedOption1).toBeInTheDocument();
+    expect(breedOption2).toBeInTheDocument();
+    expect(breedOption3).toBeInTheDocument();
+    expect(breedOption4).toBeInTheDocument();
   });
 
   it("", () => {
