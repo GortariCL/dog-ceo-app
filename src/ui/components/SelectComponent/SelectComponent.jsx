@@ -5,7 +5,7 @@ import "./SelectComponent.css";
 export const SelectComponent = ({
   breedsOptions,
   subBreedOptions,
-  setBreed = () => {},
+  setBreed,
   breed,
 }) => {
   const handleChange = ({ target: { value } }) => {
