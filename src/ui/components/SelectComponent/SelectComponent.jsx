@@ -1,5 +1,3 @@
-import Select from "react-select";
-
 import "./SelectComponent.css";
 
 export const SelectComponent = ({
@@ -21,12 +19,12 @@ export const SelectComponent = ({
           data-testid="select-breed"
           onChange={handleChange}
         >
-          <option data-testid="select-option" value="Select breed" disabled>
+          <option data-testid="select-breed-option" value="Select breed" disabled>
             Select a breed
           </option>
           {breedsOptions.map((breed) => (
             <option
-              data-testid="select-option"
+              data-testid="select-breed-option"
               value={breed.value}
               key={breed.label}
             >
@@ -41,16 +39,50 @@ export const SelectComponent = ({
           data-testid="select-breed-no-info"
           className="breed__select"
         >
-          <option value="default" data-testid="select-no-info" disabled>
+          <option value="default" data-testid="select-breed-option" disabled>
             Select a breed
           </option>
-          <option data-testid="select-option" disabled>
-            No hay razas para mostrar
+          <option data-testid="select-breed-option" disabled>
+            No breed info
           </option>
         </select>
       )}
       <p className="message">Sub-breed:</p>
-      {/* <Select className="select" options={subBreedOptions} /> */}
+      {subBreedOptions.length > 0 ? (
+        <select
+          defaultValue="default"
+          placeholder="default"
+          data-testid="select-sub-breed"
+          className="breed__select"
+        >
+          <option data-testid="select-sub-breed-option" value="Select breed" disabled>
+            Select a breed
+          </option>
+          {subBreedOptions.map((subBreed) => (
+            <option
+              data-testid="select-sub-breed-option"
+              value={subBreed.value}
+              key={subBreed.label}
+            >
+              {subBreed.value}
+            </option>
+          ))}
+        </select>
+      ) : (
+        <select
+          defaultValue="default"
+          placeholder="default"
+          data-testid="select-sub-breed-no-info"
+          className="breed__select"
+        >
+          <option value="default" data-testid="select-sub-breed-option" disabled>
+            Select a sub-breed
+          </option>
+          <option data-testid="select-sub-breed-option" disabled>
+            No sub-breed info
+          </option>
+        </select>
+      )}
     </>
   );
 };
