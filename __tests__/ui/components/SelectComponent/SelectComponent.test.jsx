@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { SelectComponent } from "../../../../src/ui/components/SelectComponent/SelectComponent";
 
 const mockSetBreed = vi.fn();
-const breedOptions = [
+const breedsOptions = [
   { value: "Hound", label: "Hound" },
   { value: "Beagle", label: "Beagle" },
   { value: "Akita", label: "Akita" },
@@ -37,7 +37,7 @@ describe("given the <SelectComponent />", () => {
     // Arrange
     const { getByText, getByTestId } = render(
       <SelectComponent
-        breedsOptions={breedOptions}
+        breedsOptions={breedsOptions}
         subBreedOptions={subBreedOptions}
         setBreed={mockSetBreed}
         breed=""
@@ -61,7 +61,7 @@ describe("given the <SelectComponent />", () => {
     // Arrange
     const { getByTestId, getAllByTestId } = render(
       <SelectComponent
-        breedsOptions={breedOptions}
+        breedsOptions={breedsOptions}
         subBreedOptions={subBreedOptions}
         setBreed={mockSetBreed}
         breed=""
@@ -70,13 +70,26 @@ describe("given the <SelectComponent />", () => {
     // Act
     const selectBreed = getByTestId("select-breed");
     fireEvent.change(selectBreed, { target: { value: "Beagle" } });
-    const breedsOptions = getAllByTestId("select-option");
+    const breedOptions = getAllByTestId("select-option");
     // Assert
-    expect(breedsOptions[0].selected).toBeFalsy();
-    expect(breedsOptions[1].selected).toBeFalsy();
-    expect(breedsOptions[2].selected).toBeTruthy();
-    expect(breedsOptions[3].selected).toBeFalsy();
-    expect(breedsOptions[4].selected).toBeFalsy();
+    expect(breedOptions[0].selected).toBeFalsy();
+    expect(breedOptions[1].selected).toBeFalsy();
+    expect(breedOptions[2].selected).toBeTruthy();
+    expect(breedOptions[3].selected).toBeFalsy();
+    expect(breedOptions[4].selected).toBeFalsy();
     expect(mockSetBreed).toHaveBeenCalledWith("Beagle");
+  });
+
+  it("should render the sub-breed select", () => {
+    const { getByText } = render(
+      <SelectComponent
+        breedsOptions={breedsOptions}
+        subBreedOptions={subBreedOptions}
+        setBreed={mockSetBreed}
+        breed=""
+      />
+    );
+    const subBreedSelect = getByText("Sub-breed:");
+    expect(subBreedSelect).toBeInTheDocument();
   });
 });
