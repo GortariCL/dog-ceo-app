@@ -4,13 +4,14 @@ import { Card } from "./ui/components/Card/Card";
 import { Header } from "./ui/components/Header/Header";
 
 function App() {
-  const [breed, setBreed] = useState("beagle");
+  const [breed, setBreed] = useState("");
   const [breedImages, setBreedImages] = useState([]);
   const [breedsOptions, setBreedsOptions] = useState([]);
   const [subBreedOptions, setSubBreedOptions] = useState([]);
 
   useEffect(() => {
     getAllBreeds().then((res) => {
+      console.log("allBreeds => ", res);
       setBreedsOptions(
         Object.keys(res.message).map((breed) => {
           return { label: breed, value: breed };
@@ -29,10 +30,12 @@ function App() {
     });
 
     getImagesByBreed(breed).then((res) => {
+      console.log("getImagesByBreed => ", res);
       setBreedImages(res.message);
     });
 
     getSubBreedList(breed).then((res) => {
+      console.log("subBreedList => ", res);
       setSubBreedOptions(
         res.message.map((subBreed) => {
           return { label: subBreed, value: subBreed };
@@ -48,8 +51,9 @@ function App() {
         subBreedOptions={subBreedOptions}
         setBreed={setBreed}
         breed={breed}
+        data-testid="header"
       />
-      <Card breedImages={breedImages} />
+      <Card breedImages={breedImages} data-testid="card" />
     </>
   );
 }

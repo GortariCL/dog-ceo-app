@@ -103,7 +103,7 @@ describe("given the <SelectComponent />", () => {
         breed=""
       />
     );
-    // Act 
+    // Act
     const subBreedSelect = getByText("Sub-breed:");
     // Assert
     expect(subBreedSelect).toBeInTheDocument();
